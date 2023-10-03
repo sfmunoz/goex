@@ -1,7 +1,7 @@
 //
 // vim: set foldmethod=marker:
 //
-// URL:  https://github.com/sfmunoz/nimex
+// URL:  https://github.com/sfmunoz/goex
 // Date: Tue Oct  3 04:46:23 PM UTC 2023
 //
 // Compile/run:
