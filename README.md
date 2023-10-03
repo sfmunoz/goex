@@ -11,3 +11,4 @@ This repository holds [Go](https://go.dev/) snippets created while I'm recalling
 ## Core
 
 - [pointers_refs.go](https://github.com/sfmunoz/goex/blob/main/pointers_refs.go): pointers and references
+- [structs_ints.go](https://github.com/sfmunoz/goex/blob/main/structs_ints.go): structs and interfaces
