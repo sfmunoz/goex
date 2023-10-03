@@ -22,20 +22,20 @@ import "fmt"
 // {{{ func valChange()
 
 func valChange(x int) {
-    prefix := "valChange():"
-    fmt.Println(prefix,"x =",x,"/ &x =",&x,"(before)")
-    x = 2
-    fmt.Println(prefix,"x =",x,"/ &x =",&x,"(after)")
+	prefix := "valChange():"
+	fmt.Println(prefix, "x =", x, "/ &x =", &x, "(before)")
+	x = 2
+	fmt.Println(prefix, "x =", x, "/ &x =", &x, "(after)")
 }
 
 // }}}
 // {{{ func refChange()
 
 func refChange(x *int) {
-    prefix := "refChange():"
-    fmt.Println(prefix,"*x =",*x,"/ x =",x,"(before)")
-    *x = 2
-    fmt.Println(prefix,"*x =",*x,"/ x =",x,"(after)")
+	prefix := "refChange():"
+	fmt.Println(prefix, "*x =", *x, "/ x =", x, "(before)")
+	*x = 2
+	fmt.Println(prefix, "*x =", *x, "/ x =", x, "(after)")
 }
 
 // }}}
@@ -43,13 +43,13 @@ func refChange(x *int) {
 // {{{ func main()
 
 func main() {
-    var x int = 0
-    prefix := "     main():"
-    fmt.Println(prefix,"x =",x,"/ &x =",&x)
-    valChange(x)
-	fmt.Println(prefix,"x =",x,"/ &x =",&x)
-    refChange(&x)
-	fmt.Println(prefix,"x =",x,"/ &x =",&x)
+	var x int = 0
+	prefix := "     main():"
+	fmt.Println(prefix, "x =", x, "/ &x =", &x)
+	valChange(x)
+	fmt.Println(prefix, "x =", x, "/ &x =", &x)
+	refChange(&x)
+	fmt.Println(prefix, "x =", x, "/ &x =", &x)
 }
 
 // }}}
