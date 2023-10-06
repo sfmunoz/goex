@@ -25,6 +25,6 @@ From [How to Write Go Code](https://go.dev/doc/code):
 
 ## Core
 
-- [main.go](https://github.com/sfmunoz/goex/blob/main/main.go): executable, command-line parsing, ...
+- [main.go](https://github.com/sfmunoz/goex/blob/main/main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
 - [pointers_refs.go](https://github.com/sfmunoz/goex/blob/main/pointers_refs/pointers_refs.go): pointers and references
 - [structs_ints.go](https://github.com/sfmunoz/goex/blob/main/structs_ints/structs_ints.go): structs and interfaces
