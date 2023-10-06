@@ -21,7 +21,17 @@ import (
 	pr "github.com/sfmunoz/goex/pointers_refs"
 	si "github.com/sfmunoz/goex/structs_ints"
 	"os"
+	"strconv"
+	"strings"
 )
+
+// }}}
+// {{{ globals
+
+var EXAMPLES = [][]string{
+	{"pointers_refs", "pointers and references"},
+	{"structs_ints", "structures and interfaces"},
+}
 
 // }}}
 // ---- functions ----
@@ -32,12 +42,22 @@ func usage() {
 	fmt.Println("")
 	fmt.Println("Usage:")
 	fmt.Println("")
-	fmt.Println("  $ go run main.go [example]")
+	fmt.Println("  $ go run main.go [example-id-or-number]")
+	fmt.Println("")
+	fmt.Println("Examples:")
+	fmt.Println("")
+	fmt.Println("  $ go run main.go " + EXAMPLES[0][0])
+	fmt.Println("  $ go run main.go 1")
 	fmt.Println("")
 	fmt.Println("Available examples:")
 	fmt.Println("")
-	fmt.Println("  pointers_refs: pointers and references")
-	fmt.Println("   structs_ints: structures and interfaces")
+	top := -1
+	for _, v := range EXAMPLES {
+		top = max(top, len(v[0]))
+	}
+	for i, v := range EXAMPLES {
+		fmt.Printf("%3d: %s %s %s\n", i+1, v[0], strings.Repeat(".", top-len(v[0])+3), v[1])
+	}
 	fmt.Println("")
 	fmt.Println("Reference:")
 	fmt.Println("")
@@ -61,6 +81,10 @@ func main() {
 		os.Exit(1)
 	}
 	ex := flag.Arg(0)
+	exN, err := strconv.Atoi(ex)
+	if err == nil && exN >= 1 && exN <= len(EXAMPLES) {
+		ex = EXAMPLES[exN-1][0]
+	}
 	switch ex {
 	case "pointers_refs":
 		pr.Main()
