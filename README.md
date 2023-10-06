@@ -4,7 +4,8 @@ This repository holds [Go](https://go.dev/) snippets created while I'm recalling
 
 ## References
 
-* https://go.dev/doc/effective_go
+* [Effective Go](https://go.dev/doc/effective_go)
+* [A Tour of Go](https://go.dev/tour/)
 * [Go Programming](https://www.youtube.com/watch?v=CF9S4QZuV30) ([Derek Banas](https://www.youtube.com/@derekbanas))
   * [Cheat sheet](https://www.newthinktank.com/2015/02/go-programming-tutorial/)
 
