@@ -4,13 +4,10 @@
 // URL:  https://github.com/sfmunoz/goex
 // Date: Tue Oct  3 04:46:23 PM UTC 2023
 //
-// Compile/run:
-//   $ go run pointers_refs.go
-//
 
 // {{{ package
 
-package main
+package pointers_refs
 
 // }}}
 // {{{ imports
@@ -18,7 +15,7 @@ package main
 import "fmt"
 
 // }}}
-// ---- funcs ----
+// ---- funcs (private) ----
 // {{{ func valChange()
 
 func valChange(x int) {
@@ -39,10 +36,10 @@ func refChange(x *int) {
 }
 
 // }}}
-// ---- main ----
-// {{{ func main()
+// ---- funcs (public) ----
+// {{{ func Main()
 
-func main() {
+func Main() {
 	var x int = 0
 	prefix := "     main():"
 	fmt.Println(prefix, "x =", x, "/ &x =", &x)

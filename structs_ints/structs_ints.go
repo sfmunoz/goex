@@ -4,13 +4,10 @@
 // URL:  https://github.com/sfmunoz/goex
 // Date: Tue Oct  3 05:11:38 PM UTC 2023
 //
-// Compile/run:
-//   $ go run structs_ints.go
-//
 
 // {{{ package
 
-package main
+package structs_ints
 
 // }}}
 // {{{ imports
@@ -43,7 +40,7 @@ type Circ struct {
 }
 
 // }}}
-// ---- funcs ----
+// ---- funcs (private) ----
 // {{{ func (r Rect) area()
 
 func (r Rect) area() float64 {
@@ -65,10 +62,10 @@ func getArea(s Shape) float64 {
 }
 
 // }}}
-// ---- main ----
-// {{{ func main()
+// ---- funcs (public) ----
+// {{{ func Main()
 
-func main() {
+func Main() {
 	r := Rect{4, 5}
 	c := Circ{4}
 	fmt.Printf("Rect%v -> %.2f -- %.2f\n", r, r.area(), getArea(r))
