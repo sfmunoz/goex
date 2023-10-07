@@ -15,6 +15,14 @@ package pointers_refs
 import "fmt"
 
 // }}}
+// ---- types ----
+// {{{ type Data struct
+
+type Data struct {
+	val int
+}
+
+// }}}
 // ---- funcs (private) ----
 // {{{ func valChange()
 
@@ -36,6 +44,27 @@ func refChange(x *int) {
 }
 
 // }}}
+// {{{ func(d Data) valChange()
+
+func (d Data) valChange(val int) {
+	d.val = val
+}
+
+// }}}
+// {{{ func(d *Data) refChange()
+
+func (d *Data) refChange(val int) {
+	d.val = val // alt: (*d).val = val
+}
+
+// }}}
+// {{{ func(d Data) String()
+
+func (d Data) String() string {
+	return fmt.Sprintf("val = %d", d.val)
+}
+
+// }}}
 // ---- funcs (public) ----
 // {{{ func Main()
 
@@ -47,6 +76,13 @@ func Main() {
 	fmt.Println(prefix, "x =", x, "/ &x =", &x)
 	refChange(&x)
 	fmt.Println(prefix, "x =", x, "/ &x =", &x)
+	fmt.Println("--------")
+	d := Data{1}
+	fmt.Printf("%s %s -- initial\n", prefix, d)
+	d.valChange(2)
+	fmt.Printf("%s %s -- d.valChange(2) applied\n", prefix, d)
+	d.refChange(3)
+	fmt.Printf("%s %s -- d.refChange(3) applied\n", prefix, d)
 }
 
 // }}}
