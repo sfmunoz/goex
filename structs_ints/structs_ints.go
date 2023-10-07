@@ -68,8 +68,8 @@ func getArea(s Shape) float64 {
 func Main() {
 	r := Rect{4, 5}
 	c := Circ{4}
-	fmt.Printf("Rect%v -> %.2f -- %.2f\n", r, r.area(), getArea(r))
-	fmt.Printf("Circ%v -> %.2f -- %.2f\n", c, c.area(), getArea(c))
+	fmt.Printf("Rect%+v -> %.2f -- %.2f\n", r, r.area(), getArea(r))
+	fmt.Printf("Circ%+v -> %.2f -- %.2f\n", c, c.area(), getArea(c))
 }
 
 // }}}
