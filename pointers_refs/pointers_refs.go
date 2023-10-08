@@ -19,7 +19,8 @@ import "fmt"
 // {{{ type Data struct
 
 type Data struct {
-	val int
+	val    int
+	prints int
 }
 
 // }}}
@@ -58,10 +59,11 @@ func (d *Data) refChange(val int) {
 }
 
 // }}}
-// {{{ func(d Data) String()
+// {{{ func(d *Data) String()
 
-func (d Data) String() string {
-	return fmt.Sprintf("val = %d", d.val)
+func (d *Data) String() string {
+	d.prints += 1
+	return fmt.Sprintf("Data{val = %d, prints = %d}", d.val, d.prints)
 }
 
 // }}}
@@ -77,12 +79,19 @@ func Main() {
 	refChange(&x)
 	fmt.Println(prefix, "x =", x, "/ &x =", &x)
 	fmt.Println("--------")
-	d := Data{1}
-	fmt.Printf("%s %s -- initial\n", prefix, d)
-	d.valChange(2)
-	fmt.Printf("%s %s -- d.valChange(2) applied\n", prefix, d)
-	d.refChange(3)
-	fmt.Printf("%s %s -- d.refChange(3) applied\n", prefix, d)
+	dv := Data{1, 0}
+	fmt.Printf("%s %s -- initial\n", prefix, &dv)
+	dv.valChange(2)
+	fmt.Printf("%s %s -- dv.valChange(2) applied\n", prefix, &dv)
+	dv.refChange(3)
+	fmt.Printf("%s %s -- dv.refChange(3) applied\n", prefix, &dv)
+	fmt.Println("--------")
+	dp := &Data{6, 0}
+	fmt.Printf("%s %s -- initial\n", prefix, dp)
+	dp.valChange(7)
+	fmt.Printf("%s %s -- dp.valChange(7) applied\n", prefix, dp)
+	dp.refChange(8)
+	fmt.Printf("%s %s -- dp.refChange(8) applied\n", prefix, dp)
 }
 
 // }}}
