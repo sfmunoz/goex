@@ -27,4 +27,12 @@ From [How to Write Go Code](https://go.dev/doc/code):
 
 - [main.go](https://github.com/sfmunoz/goex/blob/main/main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
 - [pointers_refs.go](https://github.com/sfmunoz/goex/blob/main/pointers_refs/pointers_refs.go): pointers and references
+  - [Should I define methods on values or pointers?](https://go.dev/doc/faq#methods_on_values_or_pointers):
+    - Does the method need to modify the receiver?
+    - It will be much cheaper to use a pointer receiver.
+    - If some of the methods of the type must have pointer receivers, the rest should too, so the method set is consistent regardless of how the type is used.
+  - [Why do T and *T have different method sets?](https://go.dev/doc/faq#different_method_sets)
+    - The method set of a type T consists of all methods with receiver type T
+    - That of the corresponding pointer type *T consists of all methods with receiver *T or T.
+    - That means the method set of *T includes that of T, but not the reverse.
 - [structs_ints.go](https://github.com/sfmunoz/goex/blob/main/structs_ints/structs_ints.go): structs and interfaces
