@@ -18,6 +18,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	mn "github.com/sfmunoz/goex/make_vs_new"
 	pr "github.com/sfmunoz/goex/pointers_refs"
 	si "github.com/sfmunoz/goex/structs_ints"
 	"os"
@@ -29,6 +30,7 @@ import (
 // {{{ globals
 
 var EXAMPLES = [][]any{
+	{"make_vs_new", "make vs new", func() { mn.Main() }},
 	{"pointers_refs", "pointers and references", func() { pr.Main() }},
 	{"structs_ints", "structures and interfaces", si.Main},
 }
