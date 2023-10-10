@@ -26,6 +26,9 @@ From [How to Write Go Code](https://go.dev/doc/code):
 ## Core
 
 - [main.go](https://github.com/sfmunoz/goex/blob/main/main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
+- [make_vs_new.go](https://github.com/sfmunoz/goex/blob/main/make_vs_new/make_vs_new.go): make vs new
+  - [Why would I make() or new()?](https://stackoverflow.com/questions/9320862/why-would-i-make-or-new)
+  - [Golang New vs Make](https://medium.com/learn-code/golang-new-vs-make-8a4dbd84e92b)
 - [pointers_refs.go](https://github.com/sfmunoz/goex/blob/main/pointers_refs/pointers_refs.go): pointers and references
   - [Should I define methods on values or pointers?](https://go.dev/doc/faq#methods_on_values_or_pointers):
     - Does the method need to modify the receiver?
