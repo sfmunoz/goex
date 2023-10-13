@@ -160,6 +160,47 @@ func main4() {
 }
 
 // }}}
+// {{{ func main5()
+
+func main5() {
+	fmt.Println("==== main5() ====")
+	defer fmt.Println("---- main5() ----")
+	var cs [20]chan string
+	for i := range cs {
+		cs[i] = make(chan string)
+		go func(d time.Duration, c chan string) {
+			s := fmt.Sprintf("ch-%09d", d)
+			for i := 0; i < 10; i++ {
+				c <- s
+				time.Sleep(d)
+			}
+			close(c)
+			c = nil
+		}(time.Millisecond*time.Duration(20*i), cs[i])
+	}
+	agg := make(chan string)
+	go func() {
+		wg := sync.WaitGroup{}
+		for _, c := range cs {
+			wg.Add(1)
+			go func(ch chan string) {
+				for msg := range ch {
+					agg <- msg
+				}
+				wg.Done()
+			}(c)
+		}
+		wg.Wait()
+		close(agg)
+	}()
+	n := 0
+	for m := range agg {
+		n += 1
+		fmt.Printf("[%03d] %s\n", n, m)
+	}
+}
+
+// }}}
 // ---- funcs (public) ----
 // {{{ func Main()
 
@@ -170,6 +211,7 @@ func Main() {
 	main2()
 	main3()
 	main4()
+	main5()
 }
 
 // }}}
