@@ -18,6 +18,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	co "github.com/sfmunoz/goex/concurrency"
 	mn "github.com/sfmunoz/goex/make_vs_new"
 	pr "github.com/sfmunoz/goex/pointers_refs"
 	si "github.com/sfmunoz/goex/structs_ints"
@@ -30,6 +31,7 @@ import (
 // {{{ globals
 
 var EXAMPLES = [][]any{
+	{"concurrency", "concurrency", func() { co.Main() }},
 	{"make_vs_new", "make vs new", func() { mn.Main() }},
 	{"pointers_refs", "pointers and references", func() { pr.Main() }},
 	{"structs_ints", "structures and interfaces", si.Main},

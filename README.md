@@ -26,6 +26,8 @@ From [How to Write Go Code](https://go.dev/doc/code):
 ## Core
 
 - [main.go](https://github.com/sfmunoz/goex/blob/main/main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
+- [concurrency.go](https://github.com/sfmunoz/goex/blob/main/concurrency/concurrency.go): goroutines, sync, channels, context, timeouts, select, ...
+  - [Advanced Golang: Channels, Context and Interfaces Explained](https://www.youtube.com/watch?v=VkGQFFl66X4)
 - [make_vs_new.go](https://github.com/sfmunoz/goex/blob/main/make_vs_new/make_vs_new.go): make vs new
   - [Why would I make() or new()?](https://stackoverflow.com/questions/9320862/why-would-i-make-or-new)
   - [Golang New vs Make](https://medium.com/learn-code/golang-new-vs-make-8a4dbd84e92b)
