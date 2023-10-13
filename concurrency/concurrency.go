@@ -15,6 +15,7 @@ package concurrency
 import (
 	"context"
 	"fmt"
+	"reflect"
 	"sync"
 	"time"
 )
@@ -61,11 +62,11 @@ func count(s string, c chan<- string) {
 }
 
 // }}}
-// {{{ func main1()
+// {{{ func mainTimeout()
 
-func main1() {
-	fmt.Println("==== main1() ====")
-	defer fmt.Println("---- main1() ----")
+func mainTimeout() {
+	fmt.Println("==== mainTimeout() ====")
+	defer fmt.Println("---- mainTimeout() ----")
 	// waitgroup, context, ...
 	wg := sync.WaitGroup{}
 	delays := []time.Duration{500 * time.Millisecond, 1500 * time.Millisecond}
@@ -80,11 +81,11 @@ func main1() {
 }
 
 // }}}
-// {{{ func main2()
+// {{{ func mainWG()
 
-func main2() {
-	fmt.Println("==== main2() ====")
-	defer fmt.Println("---- main2() ----")
+func mainWG() {
+	fmt.Println("==== mainWG() ====")
+	defer fmt.Println("---- mainWG() ----")
 	wg := sync.WaitGroup{}
 	c := make(chan int) // unbuffered; buffered: "make(chan int, 10)"
 	go func() {
@@ -102,11 +103,11 @@ func main2() {
 }
 
 // }}}
-// {{{ func main3()
+// {{{ func mainCount()
 
-func main3() {
-	fmt.Println("==== main3() ====")
-	defer fmt.Println("---- main3() ----")
+func mainCount() {
+	fmt.Println("==== mainCount() ====")
+	defer fmt.Println("---- mainCount() ----")
 	c := make(chan string)
 	go count("item", c)
 	for x := range c {
@@ -115,11 +116,11 @@ func main3() {
 }
 
 // }}}
-// {{{ func main4()
+// {{{ func mainSelect()
 
-func main4() {
-	fmt.Println("==== main4() ====")
-	defer fmt.Println("---- main4() ----")
+func mainSelect() {
+	fmt.Println("==== mainSelect() ====")
+	defer fmt.Println("---- mainSelect() ----")
 	c1 := make(chan string)
 	c2 := make(chan string)
 	go func() {
@@ -160,24 +161,24 @@ func main4() {
 }
 
 // }}}
-// {{{ func main5()
+// {{{ func mainFunnel() -- preferred over mainReflect()
 
-func main5() {
-	fmt.Println("==== main5() ====")
-	defer fmt.Println("---- main5() ----")
+func mainFunnel() {
+	fmt.Println("==== mainFunnel() ====")
+	defer fmt.Println("---- mainFunnel() ----")
 	var cs [20]chan string
+	// producers
 	for i := range cs {
 		cs[i] = make(chan string)
 		go func(d time.Duration, c chan string) {
-			s := fmt.Sprintf("ch-%09d", d)
 			for i := 0; i < 10; i++ {
-				c <- s
+				c <- fmt.Sprintf("ch-%09d [%d]", d, i)
 				time.Sleep(d)
 			}
 			close(c)
-			c = nil
 		}(time.Millisecond*time.Duration(20*i), cs[i])
 	}
+	// receivers
 	agg := make(chan string)
 	go func() {
 		wg := sync.WaitGroup{}
@@ -193,11 +194,50 @@ func main5() {
 		wg.Wait()
 		close(agg)
 	}()
+	// single processor (funnelled traffic)
 	n := 0
 	for m := range agg {
 		n += 1
 		fmt.Printf("[%03d] %s\n", n, m)
 	}
+}
+
+// }}}
+// {{{ func mainReflect() -- mainFunnel() is preferred
+
+func mainReflect() {
+	// I don't like this method but I prefer mainFunnel(): simpler and faster
+	// ref: https://stackoverflow.com/questions/19992334/how-to-listen-to-n-channels-dynamic-select-statement
+	fmt.Println("==== mainReflect() ====")
+	defer fmt.Println("---- mainReflect() ----")
+	var cs [20]chan string
+	for i := range cs {
+		cs[i] = make(chan string)
+		go func(d time.Duration, c chan string) {
+			for i := 0; i < 10; i++ {
+				c <- fmt.Sprintf("ch-%09d [%d]", d, i)
+				time.Sleep(d)
+			}
+			close(c)
+		}(time.Millisecond*time.Duration(20*i), cs[i])
+	}
+	cases := make([]reflect.SelectCase, len(cs))
+	for i, c := range cs {
+		cases[i] = reflect.SelectCase{Dir: reflect.SelectRecv, Chan: reflect.ValueOf(c)}
+	}
+	// XXX: we know it's 10x20=200... but end condition should be detected
+	tot, failures, lim := 0, 0, 200
+	for tot < lim {
+		idx, val, ok := reflect.Select(cases) // returns ok=false many times...
+		if !ok {
+			failures += 1
+			time.Sleep(10 * time.Millisecond) // XXX: slows down performance
+			continue
+		}
+		tot += 1
+		fmt.Printf("%3d %2d %s\n", tot, idx, val.String())
+	}
+	fmt.Println("tot =", tot, "; failures =", failures)
 }
 
 // }}}
@@ -207,11 +247,12 @@ func main5() {
 func Main() {
 	fmt.Println("==== Main() ====")
 	defer fmt.Println("---- Main() ----")
-	main1()
-	main2()
-	main3()
-	main4()
-	main5()
+	mainTimeout()
+	mainWG()
+	mainCount()
+	mainSelect()
+	mainFunnel()
+	mainReflect()
 }
 
 // }}}
