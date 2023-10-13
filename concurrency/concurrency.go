@@ -48,9 +48,9 @@ func push(c *chan int, x int) {
 // {{{ func count()
 
 func count(s string, c chan<- string) {
-    // chan ..... send/receive
-    // chan<- ... send-only
-    // <-chan ... receive-only
+	// chan ..... send/receive
+	// chan<- ... send-only
+	// <-chan ... receive-only
 	for i := 0; i < 5; i++ {
 		if i > 0 {
 			time.Sleep(500 * time.Millisecond)
@@ -115,6 +115,51 @@ func main3() {
 }
 
 // }}}
+// {{{ func main4()
+
+func main4() {
+	fmt.Println("==== main4() ====")
+	defer fmt.Println("---- main4() ----")
+	c1 := make(chan string)
+	c2 := make(chan string)
+	go func() {
+		for i := 0; i < 10; i++ {
+			c1 <- "500ms"
+			time.Sleep(time.Millisecond * 500)
+		}
+		close(c1)
+	}()
+	go func() {
+		for i := 0; i < 3; i++ {
+			c2 <- "2s"
+			time.Sleep(time.Second * 2)
+		}
+		close(c2)
+	}()
+	for {
+		select {
+		case m1, ok1 := <-c1:
+			if ok1 {
+				fmt.Println("c1:", m1)
+			} else {
+				c1 = nil // A nil channel is never ready for communication
+				fmt.Println("c1: closed")
+			}
+		case m2, ok2 := <-c2:
+			if ok2 {
+				fmt.Println("c2:", m2)
+			} else {
+				c2 = nil // A nil channel is never ready for communication
+				fmt.Println("c2: closed")
+			}
+		}
+		if c1 == nil && c2 == nil {
+			break
+		}
+	}
+}
+
+// }}}
 // ---- funcs (public) ----
 // {{{ func Main()
 
@@ -124,6 +169,7 @@ func Main() {
 	main1()
 	main2()
 	main3()
+	main4()
 }
 
 // }}}
