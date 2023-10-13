@@ -45,6 +45,22 @@ func push(c *chan int, x int) {
 }
 
 // }}}
+// {{{ func count()
+
+func count(s string, c chan<- string) {
+    // chan ..... send/receive
+    // chan<- ... send-only
+    // <-chan ... receive-only
+	for i := 0; i < 5; i++ {
+		if i > 0 {
+			time.Sleep(500 * time.Millisecond)
+		}
+		c <- fmt.Sprintf("%s-%d", s, i)
+	}
+	close(c)
+}
+
+// }}}
 // {{{ func main1()
 
 func main1() {
@@ -86,6 +102,19 @@ func main2() {
 }
 
 // }}}
+// {{{ func main3()
+
+func main3() {
+	fmt.Println("==== main3() ====")
+	defer fmt.Println("---- main3() ----")
+	c := make(chan string)
+	go count("item", c)
+	for x := range c {
+		fmt.Println(x)
+	}
+}
+
+// }}}
 // ---- funcs (public) ----
 // {{{ func Main()
 
@@ -94,6 +123,7 @@ func Main() {
 	defer fmt.Println("---- Main() ----")
 	main1()
 	main2()
+	main3()
 }
 
 // }}}
