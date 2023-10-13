@@ -247,12 +247,10 @@ func mainReflect() {
 func Main() {
 	fmt.Println("==== Main() ====")
 	defer fmt.Println("---- Main() ----")
-	mainTimeout()
-	mainWaitGroup()
-	mainCount()
-	mainSelect()
-	mainFunnel()
-	mainReflect()
+	fs := []func(){mainTimeout, mainWaitGroup, mainCount, mainSelect, mainFunnel, mainReflect}
+	for _, f := range fs {
+		f()
+	}
 }
 
 // }}}
