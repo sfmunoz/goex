@@ -31,6 +31,7 @@ From [How to Write Go Code](https://go.dev/doc/code):
   - [Concurrency in Go - Jake Wright](https://www.youtube.com/watch?v=LvgVSSpwND8)
   - [how to listen to N channels? (dynamic select statement)](https://stackoverflow.com/questions/19992334/how-to-listen-to-n-channels-dynamic-select-statement)
   - [Go → Reflect → SelectCase](https://pkg.go.dev/reflect#SelectCase)
+- [http_json.go](https://github.com/sfmunoz/goex/blob/main/http_json/http_json.go): HTTP Server, HTTP Client, JSON, ...
 - [make_vs_new.go](https://github.com/sfmunoz/goex/blob/main/make_vs_new/make_vs_new.go): make vs new
   - [Why would I make() or new()?](https://stackoverflow.com/questions/9320862/why-would-i-make-or-new)
   - [Golang New vs Make](https://medium.com/learn-code/golang-new-vs-make-8a4dbd84e92b)
