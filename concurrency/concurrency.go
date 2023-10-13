@@ -81,11 +81,11 @@ func mainTimeout() {
 }
 
 // }}}
-// {{{ func mainWG()
+// {{{ func mainWaitGroup()
 
-func mainWG() {
-	fmt.Println("==== mainWG() ====")
-	defer fmt.Println("---- mainWG() ----")
+func mainWaitGroup() {
+	fmt.Println("==== mainWaitGroup() ====")
+	defer fmt.Println("---- mainWaitGroup() ----")
 	wg := sync.WaitGroup{}
 	c := make(chan int) // unbuffered; buffered: "make(chan int, 10)"
 	go func() {
@@ -178,7 +178,7 @@ func mainFunnel() {
 			close(c)
 		}(time.Millisecond*time.Duration(20*i), cs[i])
 	}
-	// receivers
+	// receivers: funnel traffic from multiple channels to aggregated channel
 	agg := make(chan string)
 	go func() {
 		wg := sync.WaitGroup{}
@@ -248,7 +248,7 @@ func Main() {
 	fmt.Println("==== Main() ====")
 	defer fmt.Println("---- Main() ----")
 	mainTimeout()
-	mainWG()
+	mainWaitGroup()
 	mainCount()
 	mainSelect()
 	mainFunnel()
