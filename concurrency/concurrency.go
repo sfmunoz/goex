@@ -45,11 +45,11 @@ func push(c *chan int, x int) {
 }
 
 // }}}
-// ---- funcs (public) ----
-// {{{ func Main()
+// {{{ func main1()
 
-func Main() {
-	fmt.Println("==== begin ====")
+func main1() {
+	fmt.Println("==== main1() ====")
+	defer fmt.Println("---- main1() ----")
 	// waitgroup, context, ...
 	wg := sync.WaitGroup{}
 	delays := []time.Duration{500 * time.Millisecond, 1500 * time.Millisecond}
@@ -61,7 +61,15 @@ func Main() {
 		go slumber(ctx, &wg, delay)
 		wg.Wait()
 	}
-	// goroutines, channels, ...
+}
+
+// }}}
+// {{{ func main2()
+
+func main2() {
+	fmt.Println("==== main2() ====")
+	defer fmt.Println("---- main2() ----")
+	wg := sync.WaitGroup{}
 	c := make(chan int) // unbuffered; buffered: "make(chan int, 10)"
 	go func() {
 		wg.Add(1)
@@ -75,7 +83,17 @@ func Main() {
 		fmt.Printf("[%d] n = %d\n", i, n)
 	}
 	wg.Wait()
-	fmt.Println("---- end ----")
+}
+
+// }}}
+// ---- funcs (public) ----
+// {{{ func Main()
+
+func Main() {
+	fmt.Println("==== Main() ====")
+	defer fmt.Println("---- Main() ----")
+	main1()
+	main2()
 }
 
 // }}}
