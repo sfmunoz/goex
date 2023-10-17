@@ -25,17 +25,17 @@ From [How to Write Go Code](https://go.dev/doc/code):
 
 ## Core
 
-- [main.go](https://github.com/sfmunoz/goex/blob/main/main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
-- [concurrency.go](https://github.com/sfmunoz/goex/blob/main/concurrency/concurrency.go): goroutines, sync, channels, context, timeouts, select, ...
+- [main.go](main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
+- [concurrency.go](concurrency/concurrency.go): goroutines, sync, channels, context, timeouts, select, ...
   - [Advanced Golang: Channels, Context and Interfaces Explained - Code With Ryan](https://www.youtube.com/watch?v=VkGQFFl66X4)
   - [Concurrency in Go - Jake Wright](https://www.youtube.com/watch?v=LvgVSSpwND8)
   - [how to listen to N channels? (dynamic select statement)](https://stackoverflow.com/questions/19992334/how-to-listen-to-n-channels-dynamic-select-statement)
   - [Go → Reflect → SelectCase](https://pkg.go.dev/reflect#SelectCase)
-- [http_json.go](https://github.com/sfmunoz/goex/blob/main/http_json/http_json.go): HTTP Server, HTTP Client, JSON, ...
-- [make_vs_new.go](https://github.com/sfmunoz/goex/blob/main/make_vs_new/make_vs_new.go): make vs new
+- [http_json.go](http_json/http_json.go): HTTP Server, HTTP Client, JSON, ...
+- [make_vs_new.go](make_vs_new/make_vs_new.go): make vs new
   - [Why would I make() or new()?](https://stackoverflow.com/questions/9320862/why-would-i-make-or-new)
   - [Golang New vs Make](https://medium.com/learn-code/golang-new-vs-make-8a4dbd84e92b)
-- [pointers_refs.go](https://github.com/sfmunoz/goex/blob/main/pointers_refs/pointers_refs.go): pointers and references
+- [pointers_refs.go](pointers_refs/pointers_refs.go): pointers and references
   - [Should I define methods on values or pointers?](https://go.dev/doc/faq#methods_on_values_or_pointers):
     - Does the method need to modify the receiver?
     - It will be much cheaper to use a pointer receiver.
@@ -44,4 +44,4 @@ From [How to Write Go Code](https://go.dev/doc/code):
     - The method set of a type T consists of all methods with receiver type T
     - That of the corresponding pointer type *T consists of all methods with receiver *T or T.
     - That means the method set of *T includes that of T, but not the reverse.
-- [structs_ints.go](https://github.com/sfmunoz/goex/blob/main/structs_ints/structs_ints.go): structs and interfaces
+- [structs_ints.go](structs_ints/structs_ints.go): structs and interfaces
