@@ -18,6 +18,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	cc "github.com/sfmunoz/goex/c_call"
 	co "github.com/sfmunoz/goex/concurrency"
 	hj "github.com/sfmunoz/goex/http_json"
 	mn "github.com/sfmunoz/goex/make_vs_new"
@@ -32,6 +33,7 @@ import (
 // {{{ globals
 
 var EXAMPLES = [][]any{
+	{"c_call", "call C code from Go", func() { cc.Main() }},
 	{"concurrency", "concurrency", func() { co.Main() }},
 	{"http_json", "HTTP/JSON client/server", func() { hj.Main() }},
 	{"make_vs_new", "make vs new", func() { mn.Main() }},

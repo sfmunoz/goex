@@ -26,6 +26,9 @@ From [How to Write Go Code](https://go.dev/doc/code):
 ## Core
 
 - [main.go](main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
+- [c_call.go](c_call/c_call.go): call C code from Go
+  - [Calling C code from go](https://karthikkaranth.me/blog/calling-c-code-from-go/)
+  - [Call C code from Golang](https://medium.com/@vivek2793/call-c-code-from-golang-8783c6b58a5c)
 - [concurrency.go](concurrency/concurrency.go): goroutines, sync, channels, context, timeouts, select, ...
   - [Advanced Golang: Channels, Context and Interfaces Explained - Code With Ryan](https://www.youtube.com/watch?v=VkGQFFl66X4)
   - [Concurrency in Go - Jake Wright](https://www.youtube.com/watch?v=LvgVSSpwND8)
