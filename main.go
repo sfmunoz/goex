@@ -23,6 +23,7 @@ import (
 	hj "github.com/sfmunoz/goex/http_json"
 	mn "github.com/sfmunoz/goex/make_vs_new"
 	pr "github.com/sfmunoz/goex/pointers_refs"
+	re "github.com/sfmunoz/goex/reflection"
 	si "github.com/sfmunoz/goex/structs_ints"
 	"os"
 	"strconv"
@@ -38,6 +39,7 @@ var EXAMPLES = [][]any{
 	{"http_json", "HTTP/JSON client/server", func() { hj.Main() }},
 	{"make_vs_new", "make vs new", func() { mn.Main() }},
 	{"pointers_refs", "pointers and references", func() { pr.Main() }},
+	{"reflection", "reflection", func() { re.Main() }},
 	{"structs_ints", "structures and interfaces", si.Main},
 }
 

@@ -47,4 +47,7 @@ From [How to Write Go Code](https://go.dev/doc/code):
     - The method set of a type T consists of all methods with receiver type T
     - That of the corresponding pointer type *T consists of all methods with receiver *T or T.
     - That means the method set of *T includes that of T, but not the reverse.
+- [reflection.go](reflection/reflection.go): reflection
+  - [Go (Golang) Reflection Tutorial](https://www.youtube.com/watch?v=f4aUrm7N5DU)
 - [structs_ints.go](structs_ints/structs_ints.go): structs and interfaces
+
