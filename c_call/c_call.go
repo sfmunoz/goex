@@ -10,7 +10,7 @@
 package c_call
 
 // }}}
-// {{{ imports
+// {{{ C code
 
 // #cgo CFLAGS: -g -Wall -Wextra
 // #include <stdlib.h>
@@ -27,6 +27,9 @@ package c_call
 //   return n;
 // }
 import "C"
+
+// }}}
+// {{{ imports
 
 import (
 	"fmt"
