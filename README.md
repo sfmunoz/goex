@@ -23,6 +23,58 @@ From [How to Write Go Code](https://go.dev/doc/code):
   * A Go repository typically contains only one module, located at the root of the repository.
   * A file named go.mod there declares the module path: the import path prefix for all packages within the module
 
+Adapted example from [Tutorial: Create a Go module](https://go.dev/doc/tutorial/create-module):
+
+```
+$ pwd
+<HOME>/go/src/example.com
+
+$ mkdir greetings
+
+$ cd greetings
+
+$ go mod init example.com/greetings
+go: creating new go.mod: module example.com/greetings
+
+$ ls
+go.mod
+
+$ cat go.mod
+module example.com/greetings
+go 1.21.2
+
+$ vi greetings.go
+
+$ cat greetings.go
+package greetings
+import "fmt"
+func Hello(name string) string {
+    return fmt.Sprintf("Hi, %v. Welcome!", name)
+}
+
+$ vi greetings_test.go 
+
+$ cat greetings_test.go
+package greetings
+import (
+    "fmt"
+    "testing"
+)
+func TestHello(t *testing.T) {
+    got := Hello("World")
+    want := "Hi, World. Welcome!"
+    if got != want {
+        t.Errorf("got != want | '%s' != '%s'", got, want)
+    }
+    fmt.Printf("ok: got == want == '%s'\n", got)
+}
+
+$ go test
+ok: got == want == 'Hi, World. Welcome!'
+PASS
+ok      example.com/greetings   0.002s
+```
+
 ## Core
 
 - [main.go](main.go): executable, command-line parsing, [type assertions (any / interface{})](https://go.dev/tour/methods/15) ...
