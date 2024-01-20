@@ -7,7 +7,7 @@
 
 // {{{ package
 
-package pointers_refs
+package make_vs_new
 
 // }}}
 // {{{ imports
