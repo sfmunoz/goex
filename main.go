@@ -20,6 +20,7 @@ import (
 	"fmt"
 	cc "github.com/sfmunoz/goex/c_call"
 	co "github.com/sfmunoz/goex/concurrency"
+	ct "github.com/sfmunoz/goex/ctx"
 	hj "github.com/sfmunoz/goex/http_json"
 	mn "github.com/sfmunoz/goex/make_vs_new"
 	pr "github.com/sfmunoz/goex/pointers_refs"
@@ -36,6 +37,7 @@ import (
 var EXAMPLES = [][]any{
 	{"c_call", "call C code from Go", func() { cc.Main() }},
 	{"concurrency", "concurrency", func() { co.Main() }},
+	{"ctx", "context", func() { ct.Main() }},
 	{"http_json", "HTTP/JSON client/server", func() { hj.Main() }},
 	{"make_vs_new", "make vs new", func() { mn.Main() }},
 	{"pointers_refs", "pointers and references", func() { pr.Main() }},
