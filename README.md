@@ -86,6 +86,9 @@ ok      example.com/greetings   0.002s
   - [Concurrency in Go - Jake Wright](https://www.youtube.com/watch?v=LvgVSSpwND8)
   - [how to listen to N channels? (dynamic select statement)](https://stackoverflow.com/questions/19992334/how-to-listen-to-n-channels-dynamic-select-statement)
   - [Go → Reflect → SelectCase](https://pkg.go.dev/reflect#SelectCase)
+- [ctx.go](ctx/ctx.go): simple context example
+  - [Go Concurrency Patterns: Context](https://go.dev/blog/context)
+  - [Context package godoc](https://pkg.go.dev/context): Context type carries deadlines, cancellation signals and other request-scoped values across API boundaries and between processes.
 - [http_json.go](http_json/http_json.go): HTTP Server, HTTP Client, JSON, ...
 - [make_vs_new.go](make_vs_new/make_vs_new.go): make vs new
   - [Why would I make() or new()?](https://stackoverflow.com/questions/9320862/why-would-i-make-or-new)
